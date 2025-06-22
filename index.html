@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ein Sof Aur - Hubstry Deep Business Intelligence Hub</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --neon-cyan: #00ffff;
+            --neon-orange: #ff6600;
+            --lava-red: #ff3300;
+            --deep-gray: #1a1a1a;
+            --pure-black: #000000;
+            --pure-white: #ffffff;
+            --glow-cyan: 0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 60px #00ffff;
+            --glow-orange: 0 0 20px #ff6600, 0 0 40px #ff6600, 0 0 60px #ff6600;
+            --glow-red: 0 0 20px #ff3300, 0 0 40px #ff3300, 0 0 60px #ff3300;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--pure-black) 0%, var(--deep-gray) 50%, var(--pure-black) 100%);
+            color: var(--pure-white);
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(10px, 10px); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .main-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--neon-cyan);
+            text-shadow: var(--glow-cyan);
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            color: var(--neon-orange);
+            text-shadow: var(--glow-orange);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--pure-white);
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 50px;
+            padding: 10px 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav a {
+            color: var(--pure-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        
+        .nav a:hover {
+            color: var(--neon-cyan);
+            text-shadow: var(--glow-cyan);
+            background: rgba(0, 255, 255, 0.1);
+        }
+        
+        /* Sections */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            color: var(--neon-orange);
+            text-shadow: var(--glow-orange);
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+        
+        .section-content {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 102, 0, 0.1) 0%, rgba(0, 255, 255, 0.1) 100%);
+            border: 1px solid var(--neon-orange);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--glow-cyan);
+            border-color: var(--neon-orange);
+        }
+        
+        .feature-card h3 {
+            color: var(--neon-orange);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .tech-badge {
+            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-orange));
+            color: var(--pure-black);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .mission-section {
+            background: radial-gradient(circle at center, rgba(255, 51, 0, 0.1) 0%, transparent 70%);
+        }
+        
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .mission-card {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--lava-red);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .mission-card:hover {
+            transform: scale(1.05);
+            box-shadow: var(--glow-red);
+        }
+        
+        .mission-card h3 {
+            color: var(--lava-red);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .application-card {
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--neon-orange);
+            border-radius: 15px;
+            padding: 30px;
+        }
+        
+        .application-card h3 {
+            color: var(--neon-cyan);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .application-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .application-card li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .application-card li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--neon-orange);
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 102, 0, 0.1) 100%);
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-orange));
+            color: var(--pure-black);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.5);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--neon-cyan);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .nav ul {
+                gap: 15px;
+            }
+            
+            .nav a {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .applications-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--deep-gray);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-orange));
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, var(--neon-orange), var(--neon-cyan));
+        }
+    </style>
+</head>
+<body>
+
+
+    <header class="header">
+        <div class="header-content">
+            <h1 class="main-title">EIN SOF AUR</h1>
+            <h2 class="subtitle">Hubstry Deep Business Intelligence Hub</h2>
+            <p class="tagline">The Script of All and Everything</p>
+            <p class="tagline">Desenvolvendo e prosperando os negócios digitais com segurança, inteligência e automação</p>
+        </div>
+        <div class="scroll-indicator">
+            <span style="margin-right: 10px;">segue o fio</span>
+            <span>↓</span>
+        </div>
+    </header>
+
+    <section id="paradigma" class="section">
+        <div class="container">
+            <h2 class="section-title">O Paradigma Ein Sof Aur</h2>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <p>Um paradigma epistemológico revolucionário que através de IDEs e Notebooks (como o Jupyter) realiza a convergência de conhecimentos de todas as áreas do saber humano, criando uma base de conhecimento universal e interconectada.</p>
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Convergência Universal</h3>
+                        <p>Realiza a convergência de conhecimentos de todas as áreas do saber humano através de IDEs e Notebooks avançados.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>Processamento Multimodal</h3>
+                        <p>Coleta, mineração, processamento e análise de dados em qualquer modalidade - textos, gráficos, imagens, áudio, vídeo - em mais de 7 mil línguas naturais.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>Interface Translúcida</h3>
+                        <p>Através de sensores mecatrônicos e integração de TI com Tecnologia da Automação, cria uma interface transparente dos sistemas de computação com o mundo real.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>Integração Total</h3>
+                        <p>Integra todas as linguagens existentes - línguas naturais, linguagem musical, linguagens gráficas, audiovisuais, ciências exatas e engenharias.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>IDEs e Notebooks: Nosso Novo Cérebro Cibernético</h3>
+                    <p>As IDEs estão evoluindo para se tornarem o centro de um ecossistema digital que converge diversas linguagens e formas de informação, funcionando como um verdadeiro cérebro cibernético que permite:</p>
+                    <ul style="margin-top: 20px; padding-left: 20px;">
+                        <li>Análise de código inteligente com sugestões e automatização</li>
+                        <li>Visualização de dados integrada com dashboards dinâmicos</li>
+                        <li>Inteligência artificial para treinamento de modelos</li>
+                        <li>Colaboração em tempo real entre equipes multidisciplinares</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="startup" class="section mission-section">
+        <div class="container">
+            <h2 class="section-title">Hubstry Startup</h2>
+            <div class="section-content">
+                <div class="mission-grid">
+                    <div class="mission-card">
+                        <h3>Missão</h3>
+                        <p>Desenvolver e prosperar os negócios digitais com segurança, inteligência e automação.</p>
+                    </div>
+                    
+                    <div class="mission-card">
+                        <h3>Visão</h3>
+                        <p>Ser a empresa de referência global na área de Tecnologia da Informação integrada com Tecnologia da Automação orientada aos negócios.</p>
+                    </div>
+                    
+                    <div class="mission-card">
+                        <h3>Valores</h3>
+                        <p>Disruptividade, transparência e robustez.</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Nosso Diferencial</h3>
+                    <p>Numa mesma plataforma integramos:</p>
+                    <div class="feature-grid" style="margin-top: 20px;">
+                        <div class="feature-card">
+                            <h3>Dados Multimodais</h3>
+                            <p>Integração de diferentes tipos de dados para analytics e data driven decision making.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <h3>Multilinguagem IA</h3>
+                            <p>Diferentes línguas com tradução baseada em IA, explorando nuances morfossintáticas e semânticas como riquezas metodológicas.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <h3>Visão Geopolítica</h3>
+                            <p>Diferentes línguas como pontos de vista geopolíticos complementares no tabuleiro político-econômico mundial.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Pipeline de Dados Multimodais</h3>
+                    <p>Nossa metodologia principal consiste em criar pipelines de dados multimodais que permitem:</p>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Extração</span>
+                        <span class="tech-badge">Transformação</span>
+                        <span class="tech-badge">Carregamento</span>
+                        <span class="tech-badge">Análise</span>
+                        <span class="tech-badge">Visualização</span>
+                    </div>
+                    <p>Utilizando fontes diversas como YouTube, artigos especializados, dados acadêmicos e textos processados por IA, garantindo uma visão 360° do mercado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="aplicacoes" class="section">
+        <div class="container">
+            <h2 class="section-title">Aplicações Industriais</h2>
+            <div class="section-content">
+                <div class="applications-grid">
+                    <div class="application-card">
+                        <h3>🚗 Indústria Automobilística</h3>
+                        <ul>
+                            <li>Manutenção preditiva com sensores IoT</li>
+                            <li>Otimização da produção em tempo real</li>
+                            <li>Desenvolvimento de veículos autônomos</li>
+                            <li>Análise de performance de componentes</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-badge">IoT</span>
+                            <span class="tech-badge">Machine Learning</span>
+                            <span class="tech-badge">Computer Vision</span>
+                        </div>
+                    </div>
+                    
+                    <div class="application-card">
+                        <h3>💊 Indústria Farmacêutica</h3>
+                        <ul>
+                            <li>Controle de qualidade automatizado</li>
+                            <li>Desenvolvimento acelerado de fármacos</li>
+                            <li>Tratamentos personalizados baseados em genética</li>
+                            <li>Monitoramento de processos produtivos</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Bioinformática</span>
+                            <span class="tech-badge">Big Data</span>
+                            <span class="tech-badge">AI/ML</span>
+                        </div>
+                    </div>
+                    
+                    <div class="application-card">
+                        <h3>⚡ Indústria Energética</h3>
+                        <ul>
+                            <li>Gestão inteligente de consumo energético</li>
+                            <li>Manutenção preditiva de turbinas</li>
+                            <li>Otimização da rede elétrica</li>
+                            <li>Integração de fontes renováveis</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Smart Grid</span>
+                            <span class="tech-badge">Simulação</span>
+                            <span class="tech-badge">Predictive Analytics</span>
+                        </div>
+                    </div>
+                    
+                    <div class="application-card">
+                        <h3>🏭 Manufatura 4.0</h3>
+                        <ul>
+                            <li>Robótica colaborativa avançada</li>
+                            <li>Logística inteligente automatizada</li>
+                            <li>Personalização em massa</li>
+                            <li>Otimização da cadeia de suprimentos</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Robotics</span>
+                            <span class="tech-badge">Digital Twin</span>
+                            <span class="tech-badge">Automation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Por que isso importa para a indústria?</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>Eficiência Máxima</h3>
+                            <p>Otimização de processos, redução de custos e aumento exponencial da produtividade.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <h3>Qualidade Superior</h3>
+                            <p>Garantia de conformidade com padrões internacionais e redução drástica de defeitos.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <h3>Decisões Inteligentes</h3>
+                            <p>Informações precisas em tempo real para decisões estratégicas data-driven.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <h3>Inovação Contínua</h3>
+                            <p>Implementação facilitada de novas tecnologias e criação de produtos disruptivos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tecnologias" class="section">
+        <div class="container">
+            <h2 class="section-title">Stack Tecnológico</h2>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <h3>Ferramentas de Desenvolvimento</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge">PyCharm</span>
+                        <span class="tech-badge">VS Code</span>
+                        <span class="tech-badge">RStudio</span>
+                        <span class="tech-badge">Jupyter</span>
+                        <span class="tech-badge">Google Colab</span>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Visualização e Dashboards</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Tableau</span>
+                        <span class="tech-badge">Power BI</span>
+                        <span class="tech-badge">Plotly</span>
+                        <span class="tech-badge">D3.js</span>
+                        <span class="tech-badge">Grafana</span>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Pipeline e Orquestração</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Apache Airflow</span>
+                        <span class="tech-badge">Prefect</span>
+                        <span class="tech-badge">Luigi</span>
+                        <span class="tech-badge">Kafka</span>
+                        <span class="tech-badge">Docker</span>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Análise de Dados</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Pandas</span>
+                        <span class="tech-badge">NumPy</span>
+                        <span class="tech-badge">Scikit-learn</span>
+                        <span class="tech-badge">TensorFlow</span>
+                        <span class="tech-badge">PyTorch</span>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Processamento de Linguagem Natural</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge">NLTK</span>
+                        <span class="tech-badge">spaCy</span>
+                        <span class="tech-badge">Transformers</span>
+                        <span class="tech-badge">BERT</span>
+                        <span class="tech-badge">GPT</span>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Infraestrutura e Cloud</h3>
+                    <div class="tech-stack">
+                        <span class="tech-badge">AWS</span>
+                        <span class="tech-badge">Azure</span>
+                        <span class="tech-badge">GCP</span>
+                        <span class="tech-badge">Kubernetes</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="section cta-section">
+        <div class="container">
+            <h2 class="section-title">Transforme Seu Negócio</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 40px;">Ein Sof Aur - The Script of All and Everything</p>
+            <div style="margin-top: 40px;">
+                <p>📧 contato@hubstry.com | 🌐 github.com/hubstry</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Add glowing effect to elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'pulse 2s ease-in-out infinite alternate';
+                }
+            });
+        });
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
